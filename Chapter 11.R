@@ -47,3 +47,86 @@ parse_double("1,23", locale = locale(decimal_mark = ",",
 
 parse_date(("1 augusti 2017"), locale("sv", "%d/%B/%Y"))
 
+d1 <- "January 1, 2010"
+parse_date(d1, "%B %d, %Y")
+
+d2 <- "2015-Mar-07"
+parse_date(d2, "%Y-%b-%d")
+
+d3 <- "06-Jun-2017"
+parse_date(d3, "%d-%b-%Y")
+
+d4 <- c("August 19 (2015)", "July 1 (2015)")
+parse_date(d4, "%B %d (%Y)")
+
+d5 <- "12/30/14"
+parse_date(d5, "%m/%d/%y")
+
+t1 <- "1705"
+parse_time(t1, "%H%M")
+
+t2 <- "11:15:10.12 PM"
+parse_time(t2, "%H:%M:%OS %p")
+
+# SRC workshop 1
+
+install.packages(readxl)
+
+provo_highs <- c(83, 91, 96, 94, 89, 85, 84)
+slc_highs <- c(80, 85, 95, 89, 82, 77, 81)
+
+mean_provo_highs <- mean(provo_highs)
+
+median(provo_highs)
+range(provo_highs)
+range(slc_highs)
+
+length(provo_highs)
+
+?length
+
+mean_slc_highs <- mean(slc_highs)
+average_diff <- (mean_provo_highs - mean_slc_highs)
+average_diff
+
+library(tidyverse)
+
+write_csv(mtcars, "mtcars.csv")
+
+d <- read_csv("mtcars.csv")
+
+names(d)
+summary(d)
+
+head(d)
+
+tail(d)
+
+str(d)
+
+d$am <- as.factor(d$am)
+str(d$am)
+
+?tapply()
+
+install.packages("psych")
+library(psych)
+
+tapply(d$mpg, d$gear, mean)
+
+sapply(d, mean)
+
+describe(d$hp)
+
+addmargins(table(d$carb, d$am, dnn = c("# of Carburetors","Transmission")))
+
+hist(d$wt, col = "orange", xlab = NA, main = "Distribution of Weight", border = "red")
+
+boxplot(d$mpg, d$gear)
+
+d$gear <- as.factor(d$gear)
+
+str(d$gear)
+
+describeBy(d$mpg, d$am) 
+
