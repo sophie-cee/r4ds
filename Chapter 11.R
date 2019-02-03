@@ -130,3 +130,42 @@ str(d$gear)
 
 describeBy(d$mpg, d$am) 
 
+
+# Workshop 2
+
+library(tidyverse)
+library(magrittr) # for %<>% pipe
+write_csv(mtcars, "mtcars.csv")
+d <- read_csv("mtcars.csv")
+d1 <- read_csv("carid.csv")
+d2 <- read_csv("cqi.csv")
+d <- cbind(d, d1, d2)
+d$wt <- d$wt*1000
+d %<>% select(carID, mpg, everything())
+
+library(psych)
+
+packageDescription("psych")
+
+?psych
+
+browseVignettes(package = "psych")
+
+?ggplot2
+
+?tidyverse
+
+vignette(package = "ggplot2")
+
+vignette("ggplot2-specs")
+
+install.packages("Hsmisc")
+
+library(psych)
+library(Hmisc)
+describe(d$mpg)
+
+Hmisc::describe(d$mpg)
+
+psych::describe(d$mpg)
+
