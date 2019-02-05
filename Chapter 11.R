@@ -169,3 +169,11 @@ Hmisc::describe(d$mpg)
 
 psych::describe(d$mpg)
 
+
+#####
+
+library(tidyverse)
+x <- parse_integer(c("123", "345", "abc", "123.45"), na = ".")
+
+problems(x)
+
