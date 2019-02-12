@@ -73,3 +73,108 @@ stocks %>%
   gather("year", "return", `2015`:`2016`)
 
 
+## WORK ON THIS
+
+preg <- tribble(
+  ~pregnant, ~male, ~female,
+  "yes",     NA,    10,
+  "no",      20,    12
+)
+
+# what are the variables?
+# sex, pregnant, count
+# value = "count" for integers
+
+preg_tidy <- preg %>% 
+gather(male, female, key = "sex", value = "count")
+
+preg_tidy
+
+table3 %>% 
+separate(rate, into = c("cases", "population"), convert = TRUE)
+
+table3 %>% 
+  separate(year, into = c("century", "year"), sep = 2)
+
+table5 %>% 
+  unite(new, century, year, sep = "")
+
+?separate()
+
+tibble(x = c("a,b,c", "d,e,f,g", "h,i,j")) %>% 
+  separate(x, c("one", "two", "three"), extra = "drop")
+
+tibble(x = c("a,b,c", "d,e", "f,g,i")) %>% 
+  separate(x, c("one", "two", "three"), fill = "right")
+
+?unite()
+?separate
+?extract()
+
+tibble(variable = c("X", "X", "Y", "Y"), id = c(1, 3, 4, 2)) %>%
+  unite(x, variable, id, sep = "_")
+
+stocks <- tibble(
+  year   = c(2015, 2015, 2015, 2015, 2016, 2016, 2016),
+  qtr    = c(   1,    2,    3,    4,    2,    3,    4),
+  return = c(1.88, 0.59, 0.35,   NA, 0.92, 0.17, 2.66)
+)
+
+stocks %>% 
+  spread(year, return) %>% 
+  gather(year, return, `2015`:`2016`, na.rm = TRUE)
+
+?gather
+
+stocks %>% 
+  complete(year, qtr)
+
+treatment <- tribble(
+  ~ person,           ~ treatment, ~response,
+  "Derrick Whitmore", 1,           7,
+  NA,                 2,           10,
+  NA,                 3,           9,
+  "Katherine Burke",  1,           4
+)
+
+treatment %>% 
+  fill(person)
+
+?spread()
+
+?complete()
+
+?fill()
+
+# WHO case study
+
+view(who)
+
+# some columns seem to be variables
+
+who1 <- who %>% 
+  gather(new_sp_m014:newrel_f65, key = "key", value = "cases", na.rm = T)
+
+who1
+
+# count values in "key" (unknown variable)
+
+who1 %>% 
+  count(key)
+
+who2 <- who1 %>% 
+  mutate(key = stringr::str_replace(key, "newrel", "new_rel"))
+who2
+
+who3 <- who2 %>% 
+  separate(key, into = c("new", "type", "sex"), sep = "_")
+who3
+
+who4 <- who3 %>% 
+  select(-new, -iso2, -iso3)
+who4
+
+who5 <- who4 %>% 
+  separate(sex, into = c("sex", "age"), sep = 1)
+who5
+
