@@ -64,6 +64,50 @@ Lahman::Master %>%
   filter(n > 1)
 
 Lahman::AwardsManagers %>% 
-  count(playerID) %>% 
+  count(awardID, playerID, yearID) %>% 
   filter(n > 1)
+
+flights2 %>% 
+  select(-origin, -dest) %>% 
+  left_join(airlines, by = "carrier")
+view(flights2)
+
+# joins
+
+airport_locations <- airports %>% 
+  select(faa, lat, lon)
+
+flights %>% 
+  select(year:day, hour, origin, dest) %>% 
+  left_join(airport_locations, by = c("dest" = "faa"))
+
+?planes
+
+plane_age <- planes %>% 
+  select(tailnum, year)
+flights %>% 
+  select(year:day, hour, arr_delay, dep_delay, tailnum) %>% 
+  left_join(plane_age, by = "tailnum")
+
+flight_weather <- flights %>% 
+  inner_join(weather, by = c(
+               "year" = "year",
+               "origin" = "origin",
+               "month" = "month",
+               "day" = "day",
+               "hour" = "hour"))
+
+library(viridis)
+flights %>% 
+  filter(year == 2013, month == 6, day == 13) %>% 
+  group_by(dest) %>% 
+  summarise(mean_delay = mean(arr_delay, na.rm = TRUE)) %>% 
+  inner_join(airports, by = c("dest" = "faa")) %>% 
+  ggplot(aes(lon, lat, size = mean_delay, color = mean_delay)) +
+  borders("state") +
+  geom_point() +
+  coord_quickmap() +
+  scale_color_viridis()
+
+install.packages("maps")             
 
