@@ -111,3 +111,21 @@ flights %>%
 
 install.packages("maps")             
 
+?nycflights13
+
+planes_gt100 <- 
+  filter(flights) %>% 
+  group_by(tailnum) %>% 
+  count() %>% 
+  filter(n > 100)
+
+flights %>%
+  semi_join(planes_gt100, by = "tailnum")
+
+library(fueleconomy)
+
+?fueleconomy::common
+
+fueleconomy::vehicles %>% 
+  semi_join(fueleconomy::common, by = c("make", "model"))
+
