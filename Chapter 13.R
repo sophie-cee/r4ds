@@ -52,13 +52,6 @@ ggplot2::diamonds %>%
   filter(n > 1) %>% 
   nrow()
 
-diamonds <- mutate(ggplot2::diamonds, id = row_number())
-glimpse(diamonds)
-
-glimpse(Lahman::Managers)
-glimpse(Lahman::Master)
-glimpse(Lahman::AwardsManagers)
-
 Lahman::Master %>% 
   count(playerID) %>% 
   filter(n > 1)
