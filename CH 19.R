@@ -73,3 +73,11 @@ temperature <- formula(x) {
   "hot"
   }
 }
+
+
+typeof(letters)
+
+typeof(14)
+
+typeof(1.549802029309349)
+
