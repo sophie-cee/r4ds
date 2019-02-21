@@ -177,3 +177,5 @@ x <- parse_integer(c("123", "345", "abc", "123.45"), na = ".")
 
 problems(x)
 
+str(heights)
+
