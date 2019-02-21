@@ -17,12 +17,14 @@ When you click the **Knit** button a document will be generated that includes bo
 ```{r cars}
 d.new <- mtcars %>% 
   select(mpg)
+
+(d.new)
 ```
 ```{r}
 glimpse(mtcars)
 ```
 
-```{r}
+```{r, include = FALSE}
 print(d.new)
 ```
 
