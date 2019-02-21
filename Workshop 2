@@ -1,0 +1,11 @@
+# from BYU RSC
+
+library(tidyverse)
+library(magrittr) # for %<>% pipe
+write_csv(mtcars, "mtcars.csv")
+d <- read_csv("mtcars.csv")
+d1 <- read_csv("carid.csv")
+d2 <- read_csv("cqi.csv")
+d <- cbind(d, d1, d2)
+d$wt <- d$wt*1000
+d %<>% select(carID, mpg, everything())
